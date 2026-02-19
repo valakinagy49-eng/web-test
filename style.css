@@ -100,10 +100,13 @@ header p {
 
 /* Header animációk */
 @keyframes headerPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.5;
         transform: scale(1);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.05);
@@ -114,6 +117,7 @@ header p {
     0% {
         text-shadow: 0 0 20px rgba(246, 213, 92, 0.5), 0 0 40px rgba(246, 213, 92, 0.2);
     }
+
     100% {
         text-shadow: 0 0 30px rgba(246, 213, 92, 0.8), 0 0 60px rgba(246, 213, 92, 0.4), 0 0 80px rgba(246, 213, 92, 0.2);
     }
@@ -139,7 +143,7 @@ nav ul {
     margin: 0;
 }
 
-nav > ul > li {
+nav>ul>li {
     position: relative;
 }
 
@@ -187,12 +191,12 @@ nav ul li ul {
     visibility: hidden;
     transform: translateY(-10px);
     transition: opacity var(--transition-speed) ease,
-                visibility var(--transition-speed) ease,
-                transform var(--transition-speed) ease;
+        visibility var(--transition-speed) ease,
+        transform var(--transition-speed) ease;
     z-index: 999;
 }
 
-nav ul li:hover > ul {
+nav ul li:hover>ul {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -223,7 +227,10 @@ main {
 }
 
 /* --- Címsorok --- */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--font-heading);
     color: var(--accent);
 }
@@ -374,12 +381,12 @@ table tbody tr:first-child td {
     margin-bottom: 0.5rem;
 }
 
-.lista-container > ol {
+.lista-container>ol {
     margin-left: 0;
     counter-reset: season;
 }
 
-.lista-container > ol > li {
+.lista-container>ol>li {
     font-weight: 700;
     color: var(--accent);
     margin-bottom: 0.8rem;
@@ -387,18 +394,18 @@ table tbody tr:first-child td {
     counter-increment: season;
 }
 
-.lista-container > ol > li::before {
+.lista-container>ol>li::before {
     content: counter(season) ". évad";
     font-family: var(--font-heading);
     font-size: 0.95rem;
     margin-right: 0.5rem;
 }
 
-.lista-container > ol > li > ul {
+.lista-container>ol>li>ul {
     margin-top: 0.4rem;
 }
 
-.lista-container > ol > li > ul > li {
+.lista-container>ol>li>ul>li {
     font-weight: 400;
     color: var(--text);
     font-size: 0.95rem;
@@ -670,5 +677,174 @@ footer a {
     .gallery-item {
         flex: 1 1 18rem;
         max-width: 22rem;
+    }
+}
+
+/* ================================================
+   LIGHTBOX (CSS-only, :target alapú)
+   ================================================ */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.92);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.lightbox:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 40px rgba(246, 213, 92, 0.2);
+    display: block;
+}
+
+/* Bezárás gomb */
+.lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 3rem;
+    color: var(--text);
+    text-decoration: none;
+    z-index: 2100;
+    line-height: 1;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+.lightbox-close:hover {
+    color: var(--accent);
+    transform: scale(1.2);
+    text-decoration: none;
+}
+
+.lightbox-close:visited {
+    color: var(--text);
+}
+
+/* Előző / Következő nyilak */
+.lightbox-prev,
+.lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: var(--text);
+    text-decoration: none;
+    z-index: 2100;
+    padding: 1rem;
+    transition: color var(--transition-speed), background-color var(--transition-speed);
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.lightbox-prev {
+    left: 1.5rem;
+}
+
+.lightbox-next {
+    right: 1.5rem;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    color: var(--accent);
+    background-color: rgba(246, 213, 92, 0.15);
+    text-decoration: none;
+}
+
+.lightbox-prev:visited,
+.lightbox-next:visited {
+    color: var(--text);
+}
+
+/* Képaláírás a lightboxban */
+.lightbox-caption {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--border-radius);
+    white-space: nowrap;
+}
+
+/* Galéria linkek ne változtassák a kép stílusát */
+.gallery-item a {
+    display: block;
+    text-decoration: none;
+}
+
+.gallery-item a:hover {
+    text-decoration: none;
+}
+
+/* Lightbox responsive */
+@media screen and (max-width: 768px) {
+    .lightbox-content img {
+        max-width: 95vw;
+        max-height: 70vh;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        font-size: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0.5rem;
+    }
+
+    .lightbox-prev {
+        left: 0.5rem;
+    }
+
+    .lightbox-next {
+        right: 0.5rem;
+    }
+
+    .lightbox-close {
+        top: 1rem;
+        right: 1rem;
+        font-size: 2.5rem;
+    }
+
+    .lightbox-caption {
+        font-size: 0.7rem;
+        bottom: 1rem;
+        padding: 0.4rem 1rem;
     }
 }
