@@ -1,0 +1,674 @@
+/* ================================================
+   FALLOUT - AMAZON PRIME SOROZAT
+   Közös stíluslap (style.css)
+   ================================================ */
+
+/* --- Google Fonts importálás --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
+
+/* --- CSS Változók (Variables) --- */
+:root {
+    --primary: #1B1B2F;
+    --secondary: #1A936F;
+    --accent: #F6D55C;
+    --bg: #0D0D0D;
+    --bg-light: #162029;
+    --text: #E8E8E8;
+    --text-muted: #A0A0A0;
+    --danger: #C44536;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 8px 25px rgba(246, 213, 92, 0.3);
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+/* --- Alapbeállítások (Reset) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* --- Grid Layout (fejrész, menü, tartalom, lábrész) --- */
+.page-wrapper {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+}
+
+/* ================================================
+   HEADER (Fejrész)
+   ================================================ */
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f3460 50%, var(--primary) 100%);
+    padding: 2rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--accent);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(246, 213, 92, 0.1) 0%, transparent 70%);
+    animation: headerPulse 4s ease-in-out infinite;
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(246, 213, 92, 0.5), 0 0 40px rgba(246, 213, 92, 0.2);
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+header p {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+}
+
+/* Header animációk */
+@keyframes headerPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(246, 213, 92, 0.5), 0 0 40px rgba(246, 213, 92, 0.2);
+    }
+    100% {
+        text-shadow: 0 0 30px rgba(246, 213, 92, 0.8), 0 0 60px rgba(246, 213, 92, 0.4), 0 0 80px rgba(246, 213, 92, 0.2);
+    }
+}
+
+/* ================================================
+   NAVIGÁCIÓ (Legördülő menü + Sticky)
+   ================================================ */
+nav {
+    background-color: var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    border-bottom: 1px solid rgba(246, 213, 92, 0.2);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav > ul > li {
+    position: relative;
+}
+
+nav ul li a {
+    display: block;
+    padding: 1rem 1.8rem;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+nav ul li a:hover {
+    background-color: var(--secondary);
+    color: var(--bg);
+}
+
+nav ul li a:visited {
+    color: var(--text-muted);
+}
+
+nav ul li a:hover {
+    color: var(--bg);
+}
+
+nav ul li a.active {
+    border-bottom: 3px solid var(--accent);
+    color: var(--accent);
+}
+
+/* Legördülő almenü */
+nav ul li ul {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--primary);
+    min-width: 12.5rem;
+    box-shadow: var(--shadow);
+    border-top: 2px solid var(--accent);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity var(--transition-speed) ease,
+                visibility var(--transition-speed) ease,
+                transform var(--transition-speed) ease;
+    z-index: 999;
+}
+
+nav ul li:hover > ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+nav ul li ul li a {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav ul li ul li a:hover {
+    background-color: rgba(26, 147, 111, 0.8);
+    padding-left: 2rem;
+}
+
+/* ================================================
+   FŐ TARTALOM (Main)
+   ================================================ */
+main {
+    max-width: 75rem;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* --- Címsorok --- */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--accent);
+}
+
+main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+}
+
+main h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem;
+    color: var(--secondary);
+}
+
+/* --- Bekezdések --- */
+main p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text);
+}
+
+/* --- Vízszintes vonal --- */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+    margin: 2rem 0;
+}
+
+/* --- Szöveg közé beszúrt kép --- */
+.kep-balra {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 18.75rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition-speed);
+}
+
+.kep-jobbra {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 18.75rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition-speed);
+}
+
+.kep-balra:hover,
+.kep-jobbra:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.kep-center {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* ================================================
+   LINKEK ÉS ÁLOSZTÁLYOK
+   ================================================ */
+a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #6c9a8b;
+}
+
+a:active {
+    color: var(--danger);
+}
+
+/* ================================================
+   TÁBLÁZAT (Összevont cellákkal)
+   ================================================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+table thead th {
+    background: linear-gradient(135deg, var(--primary), #0f3460);
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    padding: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+table tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: top;
+}
+
+/* Csíkos sorok (álosztály) */
+table tbody tr:nth-child(even) {
+    background-color: rgba(26, 147, 111, 0.08);
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: rgba(27, 27, 47, 0.5);
+}
+
+table tbody tr:hover {
+    background-color: rgba(26, 147, 111, 0.2);
+    transition: background-color var(--transition-speed);
+}
+
+table tbody tr:first-child td {
+    padding-top: 1rem;
+}
+
+/* ================================================
+   TÖBBSZINTŰ LISTA
+   ================================================ */
+.lista-container ul,
+.lista-container ol {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.lista-container > ol {
+    margin-left: 0;
+    counter-reset: season;
+}
+
+.lista-container > ol > li {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    list-style: none;
+    counter-increment: season;
+}
+
+.lista-container > ol > li::before {
+    content: counter(season) ". évad";
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    margin-right: 0.5rem;
+}
+
+.lista-container > ol > li > ul {
+    margin-top: 0.4rem;
+}
+
+.lista-container > ol > li > ul > li {
+    font-weight: 400;
+    color: var(--text);
+    font-size: 0.95rem;
+    list-style-type: "▸ ";
+    padding: 0.15rem 0;
+}
+
+/* ================================================
+   BEÁGYAZOTT TARTALOM (iframe – videó)
+   ================================================ */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    margin: 2rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ================================================
+   GALÉRIA (Flexbox)
+   ================================================ */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.gallery-item {
+    flex: 1 1 18rem;
+    max-width: 22rem;
+    background-color: var(--primary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    display: block;
+    transition: opacity var(--transition-speed);
+}
+
+.gallery-item:hover img {
+    opacity: 0.85;
+}
+
+.gallery-item .caption {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+/* ================================================
+   FLEX TARTALOM (Szöveg + kép szekciók)
+   ================================================ */
+.flex-section {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin: 1.5rem 0;
+}
+
+.flex-section img {
+    width: 15rem;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+}
+
+.flex-section .text-content {
+    flex: 1;
+}
+
+/* ================================================
+   FOOTER (Lábrész)
+   ================================================ */
+footer {
+    background: linear-gradient(135deg, var(--primary), #0a0a1a);
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 2px solid var(--accent);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+footer p {
+    margin: 0.25rem 0;
+}
+
+footer a {
+    color: var(--accent);
+}
+
+/* ================================================
+   EGYÉB DOBOZOK
+   ================================================ */
+.info-box {
+    background-color: rgba(26, 147, 111, 0.1);
+    border-left: 4px solid var(--secondary);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(246, 213, 92, 0.1), rgba(246, 213, 92, 0.02));
+    border: 1px solid rgba(246, 213, 92, 0.3);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: var(--border-radius);
+}
+
+/* ================================================
+   RESPONSIVE DESIGN (@media)
+   ================================================ */
+
+/* --- Tablet (769px – 1024px) --- */
+@media screen and (max-width: 1024px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    main {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    nav ul li a {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.78rem;
+    }
+
+    .flex-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flex-section img {
+        width: 100%;
+        max-width: 25rem;
+    }
+
+    .gallery-item {
+        flex: 1 1 15rem;
+    }
+}
+
+/* --- Mobil (max 768px) --- */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+        letter-spacing: 0.08em;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    /* Menü mobilra */
+    nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    nav ul li a {
+        padding: 0.75rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    nav ul li ul {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border-top: none;
+        background-color: rgba(27, 27, 47, 0.8);
+    }
+
+    nav ul li ul li a {
+        padding-left: 2rem;
+        font-size: 0.75rem;
+    }
+
+    main {
+        width: 98%;
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+
+    main h2 {
+        font-size: 1.4rem;
+    }
+
+    .kep-balra,
+    .kep-jobbra {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    table thead th,
+    table tbody td {
+        padding: 0.6rem;
+    }
+
+    .gallery-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .flex-section {
+        flex-direction: column;
+    }
+
+    .flex-section img {
+        width: 100%;
+    }
+
+    .video-container {
+        margin: 1rem 0;
+    }
+}
+
+/* --- Nagy monitor (1025px+) --- */
+@media screen and (min-width: 1025px) {
+    main {
+        max-width: 75rem;
+    }
+
+    .gallery-item {
+        flex: 1 1 18rem;
+        max-width: 22rem;
+    }
+}
