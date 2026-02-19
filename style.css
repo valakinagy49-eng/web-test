@@ -547,6 +547,48 @@ footer a {
 }
 
 /* ================================================
+   TRAILER KATTINTHATÓ KÉP
+   ================================================ */
+.trailer-link {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+}
+
+.trailer-link:hover {
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.01);
+    text-decoration: none;
+}
+
+.trailer-link:hover img {
+    opacity: 0.7;
+}
+
+.trailer-play {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    transition: padding var(--transition-speed);
+}
+
+.trailer-link:hover .trailer-play {
+    padding-bottom: 1.5rem;
+}
+
+/* ================================================
    RESPONSIVE DESIGN (@media)
    ================================================ */
 
