@@ -47,7 +47,7 @@
 
             <p>
                 Válogatás a Fallout sorozat legszebb jeleneteiből, karaktereiből és helyszíneiből.
-                A képeken átviheted az egeret a nagyítás effektért.
+                Kattints egy képre a nagyobb nézethez, majd lapozz a nyilakkal!
             </p>
 
             <hr>
@@ -56,32 +56,44 @@
             <div class="gallery">
 
                 <div class="gallery-item">
-                    <img src="kepek/pusztasag.jpg" alt="A Pusztaság látképe">
+                    <a href="#lightbox-1">
+                        <img src="kepek/pusztasag.jpg" alt="A Pusztaság látképe">
+                    </a>
                     <div class="caption">A Pusztaság látképe</div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="kepek/lucy33.png" alt="Lucy a Vault-ban">
+                    <a href="#lightbox-2">
+                        <img src="kepek/lucy33.png" alt="Lucy a Vault-ban">
+                    </a>
                     <div class="caption">Lucy a Vault 33-ban</div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="kepek/powerarmor.png" alt="Power Armor">
+                    <a href="#lightbox-3">
+                        <img src="kepek/powerarmor.png" alt="Power Armor">
+                    </a>
                     <div class="caption">Brotherhood of Steel Power Armor</div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="kepek/ghoul2.jpg" alt="The Ghoul">
+                    <a href="#lightbox-4">
+                        <img src="kepek/ghoul2.jpg" alt="The Ghoul">
+                    </a>
                     <div class="caption">The Ghoul a pusztaságban</div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="kepek/vault.jpg" alt="Vault belső tér">
+                    <a href="#lightbox-5">
+                        <img src="kepek/vault.jpg" alt="Vault belső tér">
+                    </a>
                     <div class="caption">Vault belső tér – retrofuturisztikus dizájn</div>
                 </div>
 
                 <div class="gallery-item">
-                    <img src="kepek/nuka.png" alt="Nuka-Cola reklám">
+                    <a href="#lightbox-6">
+                        <img src="kepek/nuka.png" alt="Nuka-Cola reklám">
+                    </a>
                     <div class="caption">Nuka-Cola – az ikonikus ital</div>
                 </div>
 
@@ -107,8 +119,75 @@
         </footer>
 
     </div>
+
+    <!-- LIGHTBOX NÉZET (CSS-only, :target alapú) -->
+
+    <!-- Kép 1 -->
+    <div class="lightbox" id="lightbox-1">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-6" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/pusztasag.jpg" alt="A Pusztaság látképe">
+            <a href="#lightbox-2" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">A Pusztaság látképe (1/6)</p>
+        </div>
+    </div>
+
+    <!-- Kép 2 -->
+    <div class="lightbox" id="lightbox-2">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-1" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/lucy33.png" alt="Lucy a Vault-ban">
+            <a href="#lightbox-3" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">Lucy a Vault 33-ban (2/6)</p>
+        </div>
+    </div>
+
+    <!-- Kép 3 -->
+    <div class="lightbox" id="lightbox-3">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-2" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/powerarmor.png" alt="Power Armor">
+            <a href="#lightbox-4" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">Brotherhood of Steel Power Armor (3/6)</p>
+        </div>
+    </div>
+
+    <!-- Kép 4 -->
+    <div class="lightbox" id="lightbox-4">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-3" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/ghoul2.jpg" alt="The Ghoul">
+            <a href="#lightbox-5" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">The Ghoul a pusztaságban (4/6)</p>
+        </div>
+    </div>
+
+    <!-- Kép 5 -->
+    <div class="lightbox" id="lightbox-5">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-4" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/vault.jpg" alt="Vault belső tér">
+            <a href="#lightbox-6" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">Vault belső tér – retrofuturisztikus dizájn (5/6)</p>
+        </div>
+    </div>
+
+    <!-- Kép 6 -->
+    <div class="lightbox" id="lightbox-6">
+        <div class="lightbox-content">
+            <a href="#" class="lightbox-close">&times;</a>
+            <a href="#lightbox-5" class="lightbox-prev">&#10094;</a>
+            <img src="kepek/nuka.png" alt="Nuka-Cola reklám">
+            <a href="#lightbox-1" class="lightbox-next">&#10095;</a>
+            <p class="lightbox-caption">Nuka-Cola – az ikonikus ital (6/6)</p>
+        </div>
+    </div>
+
 </body>
 
-
 </html>
-
